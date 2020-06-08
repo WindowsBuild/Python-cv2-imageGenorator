@@ -10,7 +10,7 @@ fontColor = (255,255,255)
 def textImage(text, width, height, font, textX, textY,fontScale, lineType):
     img = np.zeros((width,height,3), np.uint8)
     
-    cv2.putText(img,'Hello World!', 
+    cv2.putText(img,text, 
         (textX, textY), 
         font, 
         fontScale,
@@ -20,6 +20,19 @@ def textImage(text, width, height, font, textX, textY,fontScale, lineType):
     cv2.imwrite("out.jpg", img)
     cv2.waitKey(0)
     
+
+
+def textOverExImage(image, text, width, height, font, textX, textY,fontScale, lineType):
+    img = cv2.imread(image, 0)
+    cv2.putText(img,text, 
+        (textX, textY), 
+        font, 
+        fontScale,
+        fontColor,
+        lineType)
+    cv2.imshow("img",img)
+    cv2.imwrite("out.jpg", img)
+    cv2.waitKey(0)
 
 def staticImage(width, height):
     print('Started Genoration')
@@ -31,7 +44,7 @@ def staticImage(width, height):
     print('finished')
     
     
-
+#replacing with gui!
 def commandLineInterface():
     print('Create an Image! enter in the args below:')
     text = input('Enter Image Text: ')
@@ -45,10 +58,12 @@ def commandLineInterface():
     textImage(text, imageHeight, imageWidth, cv2.FONT_HERSHEY_SIMPLEX, textX, textY, fontScale, fontScale)
     save = input('Would you like to save?')
     
-    
-    
-commandLineInterface()
-    
-    
+
+def openFile(file):
+    img = cv2.imread(file, 0)
+    color = cv2.cvtColor(img, cv2.COLOR_RGB2RGBA)
+    cv2.imshow('Image', color)   
+
+
 
      
